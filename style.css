@@ -3,3 +3,13 @@
     --color-gray:#dbd5d5;
     --color-pink:#fce6e6;
 }
+
+body {
+    background-color: var(--color-gray);
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
