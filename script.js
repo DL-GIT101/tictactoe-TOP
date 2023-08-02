@@ -24,14 +24,19 @@ function Cell() {
 
     let value = "0";
 
-    const move = (player) => {
+    const addMark = (player) => {
         value = player;
     }
 
     const getValue = () => value;
 
     return { 
-        move, 
+        addMark, 
         getValue
     };
+};
+
+function Player(){
+
+
 };
