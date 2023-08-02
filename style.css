@@ -13,3 +13,7 @@ body {
     grid-template-rows: auto 1fr auto;
 }
 
+svg {
+    height: 50px;
+    width: 50px;
+}
