@@ -13,13 +13,23 @@ body {
     grid-template-rows: auto 1fr auto;
 }
 
+body > * {
+    padding: 0 25%;
+}
+
 svg {
     height: 50px;
     width: 50px;
 }
 
-body > * {
-    padding: 0 25%;
+header {
+    padding-top: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+header > * {
+    margin-left: 1rem;
 }
 
 footer {
