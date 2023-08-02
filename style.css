@@ -32,6 +32,13 @@ header > * {
     margin-left: 1rem;
 }
 
+main {
+    grid-row: 2 / 3;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
 footer {
     text-align: center;
     padding: 1rem;
