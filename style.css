@@ -21,3 +21,8 @@ svg {
 body > * {
     padding: 0 25%;
 }
+
+footer {
+    text-align: center;
+    padding: 1rem;
+}
