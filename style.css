@@ -17,3 +17,7 @@ svg {
     height: 50px;
     width: 50px;
 }
+
+body > * {
+    padding: 0 25%;
+}
