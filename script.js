@@ -14,8 +14,30 @@ const GameBoard = (() => {
 
    const getBoard = () => board;
 
+   const displayBoard = () => {
+        const mainBoard = document.querySelector('main');
+
+            board.forEach(cells => {
+
+                cells.forEach(cell => {
+                    
+                
+                let grid = document.createElement('div');
+                grid.className = "cell";
+
+                let mark = document.createElement('p');
+                let status = cell.getValue();
+                mark.textContent = status;
+                grid.appendChild(mark);
+
+                mainBoard.appendChild(grid);
+            });
+        });
+   };
+
     return {
-        getBoard
+        getBoard,
+        displayBoard
     };
 
 })();
@@ -36,7 +58,4 @@ function Cell() {
     };
 };
 
-function Player(){
-
-
-};
+GameBoard.displayBoard();
