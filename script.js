@@ -9,26 +9,10 @@ const Board = (() => {
 
    const getBoard = () => board;
 
-   const displayBoard = () => {
-        const mainBoard = document.querySelector('main');
 
-            board.forEach(cell => {
-
-                let grid = document.createElement('div');
-                grid.className = "cell";
-
-                let mark = document.createElement('p');
-                let status = cell.getValue();
-                mark.textContent = status;
-                grid.appendChild(mark);
-
-                mainBoard.appendChild(grid);
-            });
-   };
 
     return {
-        getBoard,
-        displayBoard
+        getBoard
     };
 
 })();
@@ -37,8 +21,8 @@ function Cell() {
 
     let value = 0;
 
-    const addMark = (player) => {
-        value = player;
+    const addMark = (token) => {
+        value = token;
     }
 
     const getValue = () => value;
@@ -57,10 +41,37 @@ function Players(name, token){
     return{getName, getToken};
 };
 
+const display = (() => {
+
+    const displayBoard = (board) => {
+        const mainBoard = document.querySelector('main');
+
+            board.forEach(cell => {
+
+                let grid = document.createElement('div');
+                grid.className = "cell";
+
+                let mark = document.createElement('p');
+                let status = cell.getValue();
+                mark.textContent = status;
+                grid.appendChild(mark);
+
+                mainBoard.appendChild(grid);
+            });
+   };
+
+    return {
+        displayBoard
+    };
+
+})();
+
 const controller = (() => {
+
+    display.displayBoard(Board.getBoard());
 
     return {
         
     };
-})();
 
+})();
