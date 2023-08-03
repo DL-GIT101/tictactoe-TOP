@@ -51,7 +51,10 @@ function Cell() {
 
 const gameController = (() => {
 
+    const playerOne = 1;
+    const playerTwo = 2;
 
+    
 
 })();
 
