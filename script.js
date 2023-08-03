@@ -1,4 +1,4 @@
-const GameBoard = (() => {
+const Board = (() => {
 
     const cellCount = 9;
     const board = [];
@@ -49,13 +49,18 @@ function Cell() {
     };
 };
 
-const gameController = (() => {
-
-    const playerOne = 1;
-    const playerTwo = 2;
-
+function Players(name, token){
     
+    const getName = () => name;
+    const getToken = () => token;
 
+    return{getName, getToken};
+};
+
+const controller = (() => {
+
+    return {
+        
+    };
 })();
 
-GameBoard.displayBoard();
