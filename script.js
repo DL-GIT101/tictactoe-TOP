@@ -1,15 +1,10 @@
 const GameBoard = (() => {
 
-    const rows = 3;
-    const columns = 3;
+    const cellCount = 9;
     const board = [];
 
-    for( let i = 0 ; i < rows ; i++){
-        board[i] = [];
-
-        for(let j = 0; j < columns; j++){
-            board[i].push(Cell());
-        }
+    for( let i = 0 ; i < cellCount ; i++){
+        board.push(Cell());
     }
 
    const getBoard = () => board;
@@ -17,11 +12,8 @@ const GameBoard = (() => {
    const displayBoard = () => {
         const mainBoard = document.querySelector('main');
 
-            board.forEach(cells => {
+            board.forEach(cell => {
 
-                cells.forEach(cell => {
-                    
-                
                 let grid = document.createElement('div');
                 grid.className = "cell";
 
@@ -32,7 +24,6 @@ const GameBoard = (() => {
 
                 mainBoard.appendChild(grid);
             });
-        });
    };
 
     return {
