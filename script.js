@@ -21,14 +21,14 @@ function Cell() {
 
     let value = 0;
 
-    const addMark = (token) => {
+    const addToken = (token) => {
         value = token;
     }
 
     const getValue = () => value;
 
     return { 
-        addMark, 
+        addToken, 
         getValue
     };
 };
@@ -52,8 +52,15 @@ const display = (() => {
                 grid.className = "cell";
 
                 let mark = document.createElement('p');
-                let status = cell.getValue();
-                mark.textContent = status;
+                let displayValue = cell.getValue();
+                if(displayValue === 1){
+                    displayValue = "X";
+                }else if(displayValue === 2){
+                    displayValue = "O";
+                }else{
+                    displayValue = " ";
+                }
+                mark.textContent = displayValue;
                 grid.appendChild(mark);
 
                 mainBoard.appendChild(grid);
