@@ -38,14 +38,18 @@ function Players(name, token){
     const getName = () => name;
     const getToken = () => token;
 
-    return{getName, getToken};
+    return{
+        getName, 
+        getToken};
 };
 
 const display = (() => {
 
     const displayBoard = (board) => {
         const mainBoard = document.querySelector('main');
-
+        while (mainBoard.hasChildNodes()) {
+            mainBoard.removeChild(mainBoard.firstChild);
+          }
             board.forEach(cell => {
 
                 let grid = document.createElement('div');
@@ -76,6 +80,10 @@ const display = (() => {
 const controller = (() => {
 
     display.displayBoard(Board.getBoard());
+
+    const activePlayer = () => {
+
+    };
 
     return {
         
