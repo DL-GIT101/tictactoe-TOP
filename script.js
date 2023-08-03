@@ -35,7 +35,7 @@ const GameBoard = (() => {
 
 function Cell() {
 
-    let value = "0";
+    let value = 0;
 
     const addMark = (player) => {
         value = player;
@@ -48,5 +48,11 @@ function Cell() {
         getValue
     };
 };
+
+const gameController = (() => {
+
+
+
+})();
 
 GameBoard.displayBoard();
