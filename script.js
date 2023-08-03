@@ -81,9 +81,16 @@ const controller = (() => {
 
     display.displayBoard(Board.getBoard());
 
-    const activePlayer = () => {
-
+    const TwoPlayerMode = () => {
+        const playerOne = Players("one", 1);
+        const playerTwo = Players("Two", 2);
     };
+
+    const OnePlayerMode = () => {
+        const playerOne = Players("one", 1);
+        const playerTwo = Players("BOT", 2);
+    };
+
 
     return {
         
