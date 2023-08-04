@@ -13,3 +13,14 @@ const Cell = () => {
     };
 };
 
+const GameBoard = (() => {
+
+    const cellNumber = 9;
+    const board = [];
+
+    for (let index = 0; index < cellNumber; index++) {
+        board[index].push(Cell());
+    }
+
+    
+})();
