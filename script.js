@@ -54,7 +54,7 @@ const GameBoard = (() => {
 const Player = (name, token) => {
 
     const getName = () => name;
-    const getToken = () => tokenl
+    const getToken = () => token;
 
     return {
         getName,
@@ -65,4 +65,19 @@ const Player = (name, token) => {
 
 const GameController = (() => {
 
+    let players = [];
+
+    const twoPlayerMode = () => {
+        players[0] = Player("Player One", 1);
+        players[1] = Player("Player Two", 2);
+    };
+
+    const AiMode = () => {
+        players[0] = Player("Player One", 1);
+        players[1] = Player("Bot", 2);
+    };
+
+    return {
+
+    };
 })();
