@@ -1,6 +1,6 @@
 const Cell = () => {
 
-    let value = 1;
+    let value = 0;
 
     const changeValue = (token) => {
         value = token;
@@ -9,7 +9,8 @@ const Cell = () => {
     const getValue = () => value;
 
     return {
-        changeValue,getValue
+        changeValue,
+        getValue
     };
 };
 
@@ -19,8 +20,33 @@ const GameBoard = (() => {
     const board = [];
 
     for (let index = 0; index < cellNumber; index++) {
-        board[index].push(Cell());
+        board.push(Cell());
     }
 
-    
+    const getBoard = () => board;
+
+    const playerMove = (index, player) => {
+        board[index].changeValue(player);
+    };
+
+    const printBoard = () => {
+        let boardValues = [];
+        board.forEach(cell => {
+            boardValues.push(cell.getValue());
+        });
+        return boardValues;
+    };
+
+    const resetBoard = () => {
+        board.forEach(cell => {
+            cell.changeValue(0);
+        });
+    };
+
+    return {
+        getBoard,
+        playerMove,
+        printBoard,
+        resetBoard
+    };
 })();
