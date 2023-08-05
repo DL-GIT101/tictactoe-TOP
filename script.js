@@ -67,23 +67,33 @@ const GameController = (() => {
 
     let players = [];
 
-    const twoPlayerMode = () => {
-        players.splice(0,2);
-        let playerOne = Player("Player One", 1);
-        let playerTwo = Player("Player Two", 2);
-        players.push(playerOne,playerTwo);
+    const createPlayer = (name) => {
+        if(players.length === 3) {return;};
+        let newPlayer = players[0] ? Player(name, 2) : Player(name, 1);
+        players.push(newPlayer);
     };
 
-    const aiMode = () => {
-        players.splice(0,2);
-        let playerOne = Player("Player One", 1);
-        let playerTwo = Player("Bot", 2);
-        players.push(playerOne,playerTwo);
+    let activePlayer = players[0];
+
+    const switchPlayerTurn = () => {
+        activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
 
+    const getActivePlayer = () => activePlayer;
+
+    const printNewRound = () => {
+        GameBoard.printBoard();
+        return activePlayer + "'s Turn";
+    };
+
+    const playRound = (index) => {
+        GameBoard.playerMove(index, getActivePlayer().getToken());
+
+        switchPlayerTurn();
+        printNewRound();
+    };
 
     return {
-        twoPlayerMode,
-        aiMode,
+        createPlayer
     };
 })();
