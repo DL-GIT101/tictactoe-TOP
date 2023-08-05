@@ -50,3 +50,19 @@ const GameBoard = (() => {
         resetBoard
     };
 })();
+
+const Player = (name, token) => {
+
+    const getName = () => name;
+    const getToken = () => tokenl
+
+    return {
+        getName,
+        getToken
+    };
+};
+
+
+const GameController = (() => {
+
+})();
