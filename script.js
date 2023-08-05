@@ -26,7 +26,14 @@ const GameBoard = (() => {
     const getBoard = () => board;
 
     const playerMove = (index, player) => {
-        board[index].changeValue(player);
+        if(board[index].getValue() === 0){
+            board[index].changeValue(player);
+            return true;
+        }else{
+            console.log("Grid already Taken");
+            return false;
+        }
+        
     };
 
     const printBoard = () => {
@@ -86,16 +93,20 @@ const GameController = (() => {
     };
 
     const printNewRound = () => {
-        GameBoard.printBoard();
+        let board = GameBoard.printBoard();
         console.log(activePlayer.getName() + "'s Turn");
+        console.log(board[0] + " " + board[1] + " " + board[2] + "\n" +
+                    board[3] + " " + board[4] + " " + board[5] + "\n" +
+                    board[6] + " " + board[7] + " " + board[8]
+        );
     };
 
     const playRound = (index) => {
-        GameBoard.playerMove(index, getActivePlayer().getToken());
+        let moveValid = GameBoard.playerMove(index, getActivePlayer().getToken());
 
-
-
-        switchPlayerTurn();
+        if(moveValid){
+            switchPlayerTurn();
+        }
         printNewRound();
     };
 
