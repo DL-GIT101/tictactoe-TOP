@@ -66,6 +66,7 @@ const Player = (name, token) => {
 const GameController = (() => {
 
     let players = [];
+    let activePlayer;
 
     const createPlayer = (name) => {
         if(players.length === 3) {return;};
@@ -73,27 +74,35 @@ const GameController = (() => {
         players.push(newPlayer);
     };
 
-    let activePlayer = players[0];
-
     const switchPlayerTurn = () => {
         activePlayer = activePlayer === players[0] ? players[1] : players[0];
     };
 
     const getActivePlayer = () => activePlayer;
 
+    const newGame = () => {
+        GameBoard.resetBoard();
+        activePlayer = players[0];
+    };
+
     const printNewRound = () => {
         GameBoard.printBoard();
-        return activePlayer + "'s Turn";
+        console.log(activePlayer.getName() + "'s Turn");
     };
 
     const playRound = (index) => {
         GameBoard.playerMove(index, getActivePlayer().getToken());
+
+
 
         switchPlayerTurn();
         printNewRound();
     };
 
     return {
-        createPlayer
+        createPlayer,
+        newGame,
+        printNewRound,
+        playRound
     };
 })();
