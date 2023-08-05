@@ -68,16 +68,22 @@ const GameController = (() => {
     let players = [];
 
     const twoPlayerMode = () => {
-        players[0] = Player("Player One", 1);
-        players[1] = Player("Player Two", 2);
+        players.splice(0,2);
+        let playerOne = Player("Player One", 1);
+        let playerTwo = Player("Player Two", 2);
+        players.push(playerOne,playerTwo);
     };
 
-    const AiMode = () => {
-        players[0] = Player("Player One", 1);
-        players[1] = Player("Bot", 2);
+    const aiMode = () => {
+        players.splice(0,2);
+        let playerOne = Player("Player One", 1);
+        let playerTwo = Player("Bot", 2);
+        players.push(playerOne,playerTwo);
     };
+
 
     return {
-
+        twoPlayerMode,
+        aiMode,
     };
 })();
