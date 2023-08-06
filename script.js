@@ -166,6 +166,7 @@ const DisplayController = (() => {
 
     const boardDoc = document.querySelector('#board');
     const message = document.querySelector('#messageBoard');
+    const header = document.querySelector('header');
 
     const inputPlayersName = () => {
         message.innerHTML = "Input Name";
@@ -210,6 +211,7 @@ const DisplayController = (() => {
     const startGame = () => {
         GameController.newGame();
         updateScreen();
+        header.removeChild(header.lastChild);
     };
 
 
@@ -260,9 +262,11 @@ const DisplayController = (() => {
       if(roundStatus === "winner"){
         finalScreen();
         message.innerHTML = GameController.getActivePlayer().getName() + " Won";
+        startButton();
       }else if(roundStatus === "draw"){
         finalScreen();
         message.innerHTML = "It's a Draw";
+        startButton();
       }else if(roundStatus === "next"){
         updateScreen();
       }else if(roundStatus === "taken"){
@@ -270,6 +274,16 @@ const DisplayController = (() => {
         message.innerHTML += "Grid Already Taken";
       }
         
+    }
+
+    const startButton = () => {
+        let btn = document.createElement('button');
+        btn.innerHTML = "New Game";
+        btn.setAttribute("id", "start");
+        btn.addEventListener('click', () => {
+            startGame();
+        })
+        header.appendChild(btn);
     }
 
     const deleteBoardChild = () => {
