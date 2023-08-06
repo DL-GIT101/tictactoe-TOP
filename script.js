@@ -128,13 +128,15 @@ const GameController = (() => {
         if(moveValid){
             let isWinner = checkIfWin();
             if(isWinner === true){
-                console.log(getActivePlayer().getName() + " Won");
+                return "winner";
             }else{
                 switchPlayerTurn();
                 printNewRound();
+                return "next";
             }
         }else{
             printNewRound();
+            return "taken";
         }
         
     };
@@ -155,7 +157,7 @@ const DisplayController = (() => {
     const message = document.querySelector('#messageBoard');
 
     const inputPlayersName = () => {
-        message.textContent = "Input Name";
+        message.innerHTML = "Input Name";
 
         for (let index = 1; index <= 2; index++) {
         let div = document.createElement('div');
@@ -202,7 +204,7 @@ const DisplayController = (() => {
 
     const updateScreen = () => {
         deleteBoardChild();
-        message.textContent = GameController.getActivePlayer().getName() + "'s Turn";
+        message.innerHTML = GameController.getActivePlayer().getName() + "'s Turn <br>";
         let board = GameController.printNewRound();
 
         board.forEach((cell,index) => {
@@ -224,8 +226,17 @@ const DisplayController = (() => {
     };
 
     const tokenDrop = (index) => {
-        GameController.playRound(index);
+      let roundStatus = GameController.playRound(index);
+      if(roundStatus === "winner"){
         updateScreen();
+        message.innerHTML = GameController.getActivePlayer().getName() + " Won";
+      }else if(roundStatus === "next"){
+        updateScreen();
+      }else if(roundStatus === "taken"){
+        updateScreen();
+        message.innerHTML += "Grid Already Taken";
+      }
+        
     }
 
     const deleteBoardChild = () => {
