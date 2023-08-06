@@ -205,7 +205,7 @@ const DisplayController = (() => {
         message.textContent = GameController.getActivePlayer().getName() + "'s Turn";
         let board = GameController.printNewRound();
 
-        board.forEach(cell => {
+        board.forEach((cell,index) => {
             let div = document.createElement('div');
             div.setAttribute("class", "cell");
             let token = "";
@@ -216,9 +216,17 @@ const DisplayController = (() => {
             }
             div.textContent = token;
             boardDoc.appendChild(div);
+            div.addEventListener('click', () => {
+                tokenDrop(index);
+            })
         });
 
     };
+
+    const tokenDrop = (index) => {
+        GameController.playRound(index);
+        updateScreen();
+    }
 
     const deleteBoardChild = () => {
         let lastChild = boardDoc.lastElementChild;
