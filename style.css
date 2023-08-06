@@ -53,8 +53,8 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    outline: 5px solid var(--color-brown);
-    color: var(--color-pink);
+    outline: 5px solid var(--color-pink);
+    color: var(--color-brown);
     font-weight: 600;
     font-size: 10rem;
     cursor: pointer;
