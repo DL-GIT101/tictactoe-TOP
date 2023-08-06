@@ -152,5 +152,61 @@ const GameController = (() => {
 
 
 const DisplayController = (() => {
+
+    const boardDoc = document.querySelector('#board');
+    const message = document.querySelector('#messageBoard');
+
+    const inputPlayersName = () => {
+        message.textContent = "Input Name";
+
+        for (let index = 1; index <= 2; index++) {
+        let div = document.createElement('div');
+        let label = document.createElement('label');
+        label.setAttribute("for", "player" + index);
+        label.textContent = "Player " + index;
+        let input = document.createElement('input');
+        input.setAttribute("type", "text");
+        input.setAttribute("maxlength", "10");
+        input.setAttribute("id", "player" + index);
+
+        div.append(label,input);
+        boardDoc.appendChild(div);
+        }
+
+        let submitBTN = document.createElement('button');
+        submitBTN.textContent = "Submit Players";
+        submitBTN.addEventListener('click', () => {
+            takePlayerNames();
+        });        
+        boardDoc.appendChild(submitBTN);
+    };
+
+    const takePlayerNames = () => {
+        const playersInput = document.querySelectorAll('input');
+
+        playersInput.forEach((player,index) => {
+            if(player.value === ""){
+                GameController.createPlayer("Player " + (index+1));
+            }else{
+                GameController.createPlayer(player.value);
+            }
+            console.log(player.value);
+        });
+
+        let lastChild = boardDoc.lastElementChild;
+        while(lastChild){
+            boardDoc.removeChild(lastChild);
+            lastChild = boardDoc.lastElementChild;
+        }
+    };
+
+
+
     
+
+    return {
+        inputPlayersName
+    };
 })();
+
+DisplayController.inputPlayersName();
