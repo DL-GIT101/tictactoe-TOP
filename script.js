@@ -146,8 +146,6 @@ const GameController = (() => {
     return {
         createPlayer,
         newGame,
-        printNewRound,
-        playRound,
-        checkIfWin
+        playRound
     };
 })();
