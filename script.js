@@ -90,6 +90,30 @@ const GameController = (() => {
     const newGame = () => {
         GameBoard.resetBoard();
         activePlayer = players[0];
+        printNewRound();
+    };
+
+    const winningCombinations = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+    [0, 4, 8], [2, 4, 6]             // Diagonals
+    ];
+
+    const checkIfWin = () => {
+        let board = GameBoard.printBoard();
+        let activePlayerToken = activePlayer.getToken();
+        let result = false;
+        for (let i = 0; i < winningCombinations.length; i++) {
+            if( board[winningCombinations[i][0]] === activePlayerToken && 
+                board[winningCombinations[i][1]] === activePlayerToken && 
+                board[winningCombinations[i][2]] === activePlayerToken){
+                    result = true;
+                    break;
+            }else{
+                result = false;
+            }
+        }
+        return result;
     };
 
     const printNewRound = () => {
@@ -102,18 +126,28 @@ const GameController = (() => {
     };
 
     const playRound = (index) => {
-        let moveValid = GameBoard.playerMove(index, getActivePlayer().getToken());
+        let activePlayerToken = getActivePlayer().getToken();
+        let moveValid = GameBoard.playerMove(index, activePlayerToken);
 
         if(moveValid){
-            switchPlayerTurn();
+            let isWinner = checkIfWin();
+            if(isWinner === true){
+                console.log(getActivePlayer().getName() + " Won");
+            }else{
+                switchPlayerTurn();
+                printNewRound();
+            }
+        }else{
+            printNewRound();
         }
-        printNewRound();
+        
     };
 
     return {
         createPlayer,
         newGame,
         printNewRound,
-        playRound
+        playRound,
+        checkIfWin
     };
 })();
