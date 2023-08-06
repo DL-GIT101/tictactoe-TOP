@@ -118,11 +118,7 @@ const GameController = (() => {
 
     const printNewRound = () => {
         let board = GameBoard.printBoard();
-        console.log(activePlayer.getName() + "'s Turn");
-        console.log(board[0] + " " + board[1] + " " + board[2] + "\n" +
-                    board[3] + " " + board[4] + " " + board[5] + "\n" +
-                    board[6] + " " + board[7] + " " + board[8]
-        );
+        return board;
     };
 
     const playRound = (index) => {
@@ -145,6 +141,8 @@ const GameController = (() => {
 
     return {
         createPlayer,
+        getActivePlayer,
+        printNewRound,
         newGame,
         playRound
     };
@@ -162,12 +160,12 @@ const DisplayController = (() => {
         for (let index = 1; index <= 2; index++) {
         let div = document.createElement('div');
         let label = document.createElement('label');
-        label.setAttribute("for", "player" + index);
+        label.setAttribute("for", `player${index}`);
         label.textContent = "Player " + index;
         let input = document.createElement('input');
         input.setAttribute("type", "text");
         input.setAttribute("maxlength", "10");
-        input.setAttribute("id", "player" + index);
+        input.setAttribute("id", `player${index}`);
 
         div.append(label,input);
         boardDoc.appendChild(div);
@@ -190,19 +188,45 @@ const DisplayController = (() => {
             }else{
                 GameController.createPlayer(player.value);
             }
-            console.log(player.value);
         });
 
+        deleteBoardChild();
+        startGame();
+    };
+
+    const startGame = () => {
+        GameController.newGame();
+        updateScreen();
+    };
+
+
+    const updateScreen = () => {
+        deleteBoardChild();
+        message.textContent = GameController.getActivePlayer().getName() + "'s Turn";
+        let board = GameController.printNewRound();
+
+        board.forEach(cell => {
+            let div = document.createElement('div');
+            div.setAttribute("class", "cell");
+            let token = "";
+            if(cell === 1){
+                token = "X";
+            }else if(cell === 2){
+                token = "O";
+            }
+            div.textContent = token;
+            boardDoc.appendChild(div);
+        });
+
+    };
+
+    const deleteBoardChild = () => {
         let lastChild = boardDoc.lastElementChild;
         while(lastChild){
             boardDoc.removeChild(lastChild);
             lastChild = boardDoc.lastElementChild;
         }
     };
-
-
-
-    
 
     return {
         inputPlayersName
