@@ -35,12 +35,21 @@ header > * {
 main {
     grid-row: 2 / 3;
     display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+#messageBoard {
+    text-align: center;
+}
+
+#board {
+    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     outline: 5px solid var(--color-gray);
 }
 
-main > .cell {
+#board > .cell {
     display: flex;
     align-items: center;
     justify-content: center;
