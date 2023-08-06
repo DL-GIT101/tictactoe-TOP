@@ -173,6 +173,7 @@ const DisplayController = (() => {
 
         for (let index = 1; index <= 2; index++) {
         let div = document.createElement('div');
+        div.className = "input";
         let label = document.createElement('label');
         label.setAttribute("for", `player${index}`);
         label.textContent = "Player " + index;
