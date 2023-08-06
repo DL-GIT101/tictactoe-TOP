@@ -102,7 +102,7 @@ const GameController = (() => {
     const checkIfWin = () => {
         let board = GameBoard.printBoard();
         let activePlayerToken = activePlayer.getToken();
-        let result = false;
+        let result;
         for (let i = 0; i < winningCombinations.length; i++) {
             if( board[winningCombinations[i][0]] === activePlayerToken && 
                 board[winningCombinations[i][1]] === activePlayerToken && 
@@ -113,6 +113,15 @@ const GameController = (() => {
                 result = false;
             }
         }
+
+        function checkToken(token) {
+            return token >= 1;
+        }
+        let allTaken = board.every(checkToken);
+        if(allTaken === true){
+            result = "draw";
+        }
+
         return result;
     };
 
@@ -129,6 +138,8 @@ const GameController = (() => {
             let isWinner = checkIfWin();
             if(isWinner === true){
                 return "winner";
+            }else if(isWinner === "draw"){
+                return "draw";
             }else{
                 switchPlayerTurn();
                 printNewRound();
@@ -225,11 +236,33 @@ const DisplayController = (() => {
 
     };
 
+    const finalScreen = () => {
+        deleteBoardChild();
+        
+        let board = GameController.printNewRound();
+        board.forEach(cell => {
+            let div = document.createElement('div');
+            div.setAttribute("class", "cell");
+            let token = "";
+            if(cell === 1){
+                token = "X";
+            }else if(cell === 2){
+                token = "O";
+            }
+            div.textContent = token;
+            div.style.cursor = "default";
+            boardDoc.appendChild(div);
+        });
+    };
+
     const tokenDrop = (index) => {
       let roundStatus = GameController.playRound(index);
       if(roundStatus === "winner"){
-        updateScreen();
+        finalScreen();
         message.innerHTML = GameController.getActivePlayer().getName() + " Won";
+      }else if(roundStatus === "draw"){
+        finalScreen();
+        message.innerHTML = "It's a Draw";
       }else if(roundStatus === "next"){
         updateScreen();
       }else if(roundStatus === "taken"){
